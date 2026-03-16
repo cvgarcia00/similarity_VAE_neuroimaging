@@ -1,0 +1,70 @@
+experiment:
+  debugging: true
+  device: cuda
+  normalization: true
+  reduction: mean
+loader:
+  load_ADNIMERGE: DATA/ADNIMERGE.csv
+  load_ADNI_BIDS: DATA/ADNI_BIDS.csv
+  load_vae_model_pth: DATA/vae_model_data/vae_model.pth
+  load_folder:
+    extension: .nii
+    dataset: ADNI_BIDS
+    prefix: r
+    target_folder_name: pet
+  load_temp: DATA/vae_model_data/ROI_MNI_V7.nii
+  splits:
+  - 0.65
+  - 0.15
+  - 0.2
+model:
+  architecture: VAE
+  batch_size: 8
+  divergence: KL
+  epochs: 350
+  latent: 8
+  correlation_targets: ["ADAS13", "AGE"]
+  correlation_type: pearson  # pearson or spearman
+  spearman_temperature: 0.9  # Temperature for soft ranking (only used if correlation_type: spearman)
+  loss:
+    beta: 0.0001
+    beta_corr_weights:
+      #beta_corr: 0.0001
+      ADAS13: 0.0
+#      CDRSB: 0.0001
+      AGE: 0.0
+  lr: 2.0e-05
+  optimizer: adam
+  reconstruction: MSE
+results:
+  feature_ABETA: ABETA
+  feature_ADAS: ADAS13
+  feature_CDRSB: CDRSB
+  feature_Entorhinal: Entorhinal
+  feature_Fusiform: Fusiform
+  feature_Hippo: Hippocampus
+  feature_MMSE: MMSE
+  feature_MidTemp: MidTemp
+  feature_PTAU: PTAU
+  feature_Ventricles: Ventricles
+  feature_AGE: AGE
+  feature_FDG: FDG
+
+
+#Data and Results folder relative to root
+root: .
+folders:
+  data: DATA
+  results: RESULTS
+subfolders:
+  data:
+    longitudinal: longitudinal_model_data
+    vae: vae_model_data
+  
+  results:
+    longitudinal: longitudinal_results
+    vae: beta_vae_results
+
+glm_files: 
+  ref_space: DATA/vae_model_data/recon_ADAS_2.0_mean_ref.nii
+  mni_space: DATA/vae_model_data/mni152.nii

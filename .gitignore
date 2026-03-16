@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.venv/
+venv/
+
+# Jupyter / logs
+.ipynb_checkpoints/
+*.log
+nohup.out
+
+# OS / editor
+.DS_Store
+.vscode/
+
+# Data and generated outputs
+ADNI_BIDS/
+DATA/
+RESULTS/
+runs/
+
+# Model artifacts
+*.pth
+*.pt
+*.ckpt
+
+# Figures and large generated files
+*.png
+*.jpg
+*.jpeg
+*.tif
+*.tiff

@@ -1,0 +1,14 @@
+torch
+torchvision
+tensorboard
+numpy
+pandas
+scipy
+scikit-learn
+scikit-image
+matplotlib
+seaborn
+nibabel
+pyyaml
+colorama
+joypy
